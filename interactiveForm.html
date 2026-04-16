@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Form</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+
+        .form-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-box">
+    <h2>Register</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="validateForm()">Submit</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let message = document.getElementById("message");
+
+    // Validation
+    if (name === "" || email === "" || password === "") {
+        message.innerText = "❌ All fields are required";
+        message.className = "error";
+        return;
+    }
+
+    if (!email.includes("@")) {
+        message.innerText = "❌ Invalid email";
+        message.className = "error";
+        return;
+    }
+
+    if (password.length < 6) {
+        message.innerText = "❌ Password must be at least 6 characters";
+        message.className = "error";
+        return;
+    }
+
+    // Success
+    message.innerText = "✅ Form submitted successfully!";
+    message.className = "success";
+}
+</script>
+
+</body>
+</html>
