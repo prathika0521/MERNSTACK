@@ -1,87 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Digital Visiting Card</title>
+    <title>EduTrack Dashboard</title>
 
     <style>
         body {
-            background: #121212;
             font-family: Arial;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .sidebar p {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .sidebar p:hover {
+            background: #34495e;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+            background: #ecf0f1;
+        }
+
+        .cards {
+            display: flex;
+            gap: 15px;
         }
 
         .card {
-            background: #1e1e1e;
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            width: 300px;
+            background: white;
+            padding: 15px;
+            flex: 1;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        h2 {
-            margin-bottom: 5px;
-        }
-
-        h4 {
-            color: #aaa;
-            margin-top: 0;
-        }
-
-        .info {
-            text-align: left;
-            margin-top: 15px;
-        }
-
-        .info p {
-            margin: 8px 0;
-        }
-
-        .skills {
-            margin-top: 15px;
-        }
-
-        .skill {
-            display: inline-block;
-            background: #333;
-            padding: 5px 10px;
+        input, button {
+            padding: 8px;
             margin: 5px;
-            border-radius: 8px;
-            font-size: 12px;
         }
 
-        a {
-            color: #4da6ff;
-            text-decoration: none;
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
-        <h2>Prathika</h2>
-        <h4>Web Developer</h4>
-
-        <div class="info">
-            <p>📞 +91 7289597820</p>
-            <p>📧 prathikagatty5@gmail.com</p>
-            <p>📍 Mangalore</p>
-            <p>🔗 <a href="#">LinkedIn Profile</a></p>
-        </div>
-
-        <div class="skills">
-            <span class="skill">HTML</span>
-            <span class="skill">CSS</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">React</span>
-        </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>EduTrack</h2>
+        <p>Dashboard</p>
+        <p>Analytics</p>
+        <p>Reports</p>
     </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Student Dashboard</h1>
+
+        <!-- Stats -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Students</h3>
+                <p id="total">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Class Average</h3>
+                <p id="average">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Score</h3>
+                <p id="top">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pass Rate</h3>
+                <p id="pass">0%</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <h2>Add Student</h2>
+
+        <input id="name" placeholder="Student Name">
+        <input id="marks" type="number" placeholder="Marks">
+        <button onclick="addStudent()">Add</button>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+<script>
+    let students = [];
+
+    function addStudent() {
+        const name = document.getElementById("name").value;
+        const marks = parseInt(document.getElementById("marks").value);
+
+        if (name === "" || isNaN(marks)) {
+            alert("Enter valid details");
+            return;
+        }
+
+        students.push({ name, marks });
+
+        document.getElementById("name").value = "";
+        document.getElementById("marks").value = "";
+
+        updateUI();
+    }
+
+    function updateUI() {
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = "";
+
+        let totalMarks = 0;
+        let topScore = 0;
+        let passCount = 0;
+
+        students.forEach(s => {
+            totalMarks += s.marks;
+            if (s.marks > topScore) topScore = s.marks;
+            if (s.marks >= 40) passCount++;
+
+            const row = `<tr>
+                <td>${s.name}</td>
+                <td>${s.marks}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+
+        const avg = students.length ? (totalMarks / students.length).toFixed(2) : 0;
+        const passRate = students.length ? ((passCount / students.length) * 100).toFixed(1) : 0;
+
+        document.getElementById("total").innerText = students.length;
+        document.getElementById("average").innerText = avg;
+        document.getElementById("top").innerText = topScore;
+        document.getElementById("pass").innerText = passRate + "%";
+    }
+</script>
 
 </body>
 </html>
