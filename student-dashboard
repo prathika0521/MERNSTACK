@@ -1,40 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Product Listing UI</title>
-=======
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Folder Architect</title>
->>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<<<<<<< HEAD
-    <h1>🛒 Product Listing UI</h1>
-
-    <input type="text" id="search" placeholder="Search product..." onkeyup="filterProducts()">
-
-    <div class="container" id="productContainer"></div>
-=======
-    <h1>📂 Folder Architect</h1>
-
-    <button onclick="loadData()">Retrieve Data</button>
-
-    <div id="output"></div>
->>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
-
-    <script src="script.js"></script>
-
-</body>
-<<<<<<< HEAD
-=======
-=======
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,6 +183,4 @@
 </script>
 
 </body>
->>>>>>> 0ddf607932c541ea301993103b41c7e2d2dd312e
->>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
 </html>

@@ -1,5 +1,6 @@
 body {
     font-family: Arial;
+<<<<<<< HEAD
     background: #f4f4f4;
     text-align: center;
     margin: 0;
@@ -23,10 +24,24 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+=======
+    text-align: center;
+    background: #f4f4f4;
+    padding: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+>>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
 }
 
 .card {
     background: white;
+<<<<<<< HEAD
     width: 220px;
     padding: 15px;
     border-radius: 10px;
@@ -60,4 +75,11 @@ button {
 
 button:hover {
     background: darkblue;
+=======
+    padding: 15px;
+    margin: 15px auto;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+>>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
 }
