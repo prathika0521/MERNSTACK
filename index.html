@@ -1,0 +1,225 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Listing UI</title>
+=======
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folder Architect</title>
+>>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<<<<<<< HEAD
+    <h1>🛒 Product Listing UI</h1>
+
+    <input type="text" id="search" placeholder="Search product..." onkeyup="filterProducts()">
+
+    <div class="container" id="productContainer"></div>
+=======
+    <h1>📂 Folder Architect</h1>
+
+    <button onclick="loadData()">Retrieve Data</button>
+
+    <div id="output"></div>
+>>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
+
+    <script src="script.js"></script>
+
+</body>
+<<<<<<< HEAD
+=======
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduTrack Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .sidebar p {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .sidebar p:hover {
+            background: #34495e;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+            background: #ecf0f1;
+        }
+
+        .cards {
+            display: flex;
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            flex: 1;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>EduTrack</h2>
+        <p>Dashboard</p>
+        <p>Analytics</p>
+        <p>Reports</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Student Dashboard</h1>
+
+        <!-- Stats -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Students</h3>
+                <p id="total">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Class Average</h3>
+                <p id="average">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Score</h3>
+                <p id="top">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pass Rate</h3>
+                <p id="pass">0%</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <h2>Add Student</h2>
+
+        <input id="name" placeholder="Student Name">
+        <input id="marks" type="number" placeholder="Marks">
+        <button onclick="addStudent()">Add</button>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+<script>
+    let students = [];
+
+    function addStudent() {
+        const name = document.getElementById("name").value;
+        const marks = parseInt(document.getElementById("marks").value);
+
+        if (name === "" || isNaN(marks)) {
+            alert("Enter valid details");
+            return;
+        }
+
+        students.push({ name, marks });
+
+        document.getElementById("name").value = "";
+        document.getElementById("marks").value = "";
+
+        updateUI();
+    }
+
+    function updateUI() {
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = "";
+
+        let totalMarks = 0;
+        let topScore = 0;
+        let passCount = 0;
+
+        students.forEach(s => {
+            totalMarks += s.marks;
+            if (s.marks > topScore) topScore = s.marks;
+            if (s.marks >= 40) passCount++;
+
+            const row = `<tr>
+                <td>${s.name}</td>
+                <td>${s.marks}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+
+        const avg = students.length ? (totalMarks / students.length).toFixed(2) : 0;
+        const passRate = students.length ? ((passCount / students.length) * 100).toFixed(1) : 0;
+
+        document.getElementById("total").innerText = students.length;
+        document.getElementById("average").innerText = avg;
+        document.getElementById("top").innerText = topScore;
+        document.getElementById("pass").innerText = passRate + "%";
+    }
+</script>
+
+</body>
+>>>>>>> 0ddf607932c541ea301993103b41c7e2d2dd312e
+>>>>>>> fb333d4bba31fdd516159e8f77f58459c58180ea
+</html>

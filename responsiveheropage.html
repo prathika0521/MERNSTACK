@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Hero Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+     
+    :root {
+      --primary:   #0f3460;
+      --accent:    #e94560;
+      --accent2:   #d4a853;
+      --bg:        #f0f4f8;
+      --surface:   #ffffff;
+      --text:      #1a1a2e;
+      --muted:     #64748b;
+      --border:    #e2d9cc;
+    }
+
+  
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+     
+    nav {
+      background: var(--primary);
+      padding: 0 40px;
+      height: 64px;
+
+ 
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      list-style: none;
+ 
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent2); }
+
+   
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+  
+    .hero {
+      min-height: calc(100vh - 64px);
+      background: var(--primary);
+      padding: 80px 60px;
+      position: relative;
+      overflow: hidden;
+
+  
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
+
+  
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(212,168,83,0.08);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -60px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(233,69,96,0.07);
+      pointer-events: none;
+    }
+
+   
+    .hero-text {
+      flex: 1;                   
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--accent2);
+      color: var(--accent2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span { color: var(--accent2); }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 36px;
+      max-width: 460px;
+      line-height: 1.75;
+    }
+
+  
+    .hero-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #c73652; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+ 
+    .hero-stats {
+      display: flex;
+      flex-direction: row;
+      gap: 36px;
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--accent2);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.50);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+ 
+    .hero-image {
+      flex: 0 0 420px;            
+      position: relative;
+      z-index: 1;
+    }
+
+    .img-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(4px);
+    }
+
+   
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.red    { background: #e94560; }
+    .dot.yellow { background: #d4a853; }
+    .dot.green  { background: #059669; }
+
+    .browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      margin-left: 8px;
+    }
+
+     
+    .fake-page { display: flex; flex-direction: column; gap: 10px; }
+
+    .fake-hero-block {
+      background: rgba(212,168,83,0.15);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .fake-h { height: 10px; border-radius: 4px; background: rgba(255,255,255,0.20); margin: 0 auto 8px; }
+    .fake-p { height: 7px;  border-radius: 4px; background: rgba(255,255,255,0.10); margin: 0 auto; }
+
+    .fake-cards {
+      display: flex;
+      gap: 8px;
+    }
+
+    .fake-card {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+  
+    .floating-badge {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(233,69,96,0.3);
+    }
+
+    .floating-badge2 {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      background: var(--accent2);
+      color: var(--primary);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(212,168,83,0.3);
+    }
+
+    
+    .features {
+      padding: 80px 60px;
+      background: var(--surface);
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .features-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .features-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+ 
+    .cards-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .feature-card {
+      flex: 1 1 260px;          
+      max-width: 320px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 0 0 14px 14px;
+      padding: 28px 24px;
+    }
+
+    .feature-card:nth-child(2) { border-top-color: var(--accent2); }
+    .feature-card:nth-child(3) { border-top-color: #059669; }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+   
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 28px;
+      font-size: 0.8rem;
+    }
+
+    footer span { color: var(--accent2); }
+ 
+    @media (max-width: 768px) {
+
+      /* Navbar: hide links, show hamburger */
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 0 24px; }
+
+      
+      .hero {
+        flex-direction: column;       
+        align-items: flex-start;
+        padding: 48px 24px 60px;
+        min-height: auto;
+        gap: 40px;
+      }
+
+      .hero h1 { font-size: 2.4rem; }
+      .hero-desc { font-size: 0.95rem; }
+      .hero-text { max-width: 100%; }
+ 
+      .hero-image {
+        flex: 0 0 auto;
+        width: 100%;
+      }
+ 
+      .hero-stats { gap: 24px; }
+      .stat-num { font-size: 1.4rem; }
+ 
+      .features { padding: 56px 24px; }
+ 
+      .feature-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .floating-badge, .floating-badge2 { display: none; }
+    }
+ 
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 1.9rem; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; }
+      .hero-stats { flex-wrap: wrap; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav>
+    <a class="nav-logo" href="#">Prathika.dev</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+ 
+  <section class="hero">
+
+ 
+    <div class="hero-text">
+      <div class="hero-tag">Responsive with Flexbox</div>
+      <h1>Build Things<br>That <span>Look Great</span><br>Everywhere.</h1>
+      <p class="hero-desc">
+        A responsive landing page that adapts beautifully from desktop to mobile using CSS Flexbox — no frameworks, just clean HTML and CSS.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn-primary" href="#">View Projects</a>
+        <a class="btn-outline" href="#">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Assignments done</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Pure CSS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">✓</span>
+          <span class="stat-label">Mobile ready</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="hero-image">
+      <div class="floating-badge2">📱 Mobile Ready</div>
+      <div class="img-card">
+        <div class="browser-bar">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+          <div class="browser-url">www.prathika.dev</div>
+        </div>
+        <div class="fake-page">
+          <div class="fake-hero-block">
+            <div class="fake-h" style="width:70%;"></div>
+            <div class="fake-h" style="width:50%;"></div>
+            <div class="fake-p" style="width:80%;"></div>
+            <div class="fake-p" style="width:60%; margin-top:8px;"></div>
+          </div>
+          <div class="fake-cards">
+            <div class="fake-card">
+              <div class="fake-h" style="width:60%;"></div>
+              <div class="fake-p" style="width:80%;"></div>
+              <div class="fake-p" style="width:70%;"></div>
+            </div>
+            <div class="fake-card">
+              <div class="fake-h" style="width:60%;"></div>
+              <div class="fake-p" style="width:80%;"></div>
+              <div class="fake-p" style="width:70%;"></div>
+            </div>
+            <div class="fake-card">
+              <div class="fake-h" style="width:60%;"></div>
+              <div class="fake-p" style="width:80%;"></div>
+              <div class="fake-p" style="width:70%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge">✦ Flexbox Layout</div>
+    </div>
+
+  </section>
+
+   
+  <section class="features">
+    <div class="features-header">
+      <h2>What Makes It Responsive?</h2>
+      <p>Three core CSS concepts that make this page work on any screen size.</p>
+    </div>
+    <div class="cards-row">
+      <div class="feature-card">
+        <span class="card-icon">↔</span>
+        <h3>Flexbox Direction</h3>
+        <p><code>flex-direction: row</code> places items side by side on desktop. On mobile, <code>@media</code> switches it to <code>column</code> so they stack vertically.</p>
+      </div>
+      <div class="feature-card">
+        <span class="card-icon">📐</span>
+        <h3>Flex Wrap</h3>
+        <p><code>flex-wrap: wrap</code> lets items automatically drop to the next line when there isn't enough horizontal space — like the feature cards below.</p>
+      </div>
+      <div class="feature-card">
+        <span class="card-icon">📱</span>
+        <h3>Media Queries</h3>
+        <p><code>@media (max-width: 768px)</code> applies different CSS rules only on smaller screens — changing layout, font sizes, and spacing for mobile.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <footer>
+    Assignment 3 &nbsp;·&nbsp; <span>Responsive Hero Page</span> 
+  </footer>
+
+</body>
+</html>
